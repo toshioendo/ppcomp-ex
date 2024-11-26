@@ -1,0 +1,58 @@
+r22n7: Warning: Permanently added 'r22n7' (ED25519) to the list of known hosts.
+r16n5: Warning: Permanently added 'r16n5' (ED25519) to the list of known hosts.
+r2n2: Warning: Permanently added 'r2n2' (ED25519) to the list of known hosts.
+r3n6: Warning: Permanently added 'r3n6' (ED25519) to the list of known hosts.
+r21n9: Warning: Permanently added 'r21n9' (ED25519) to the list of known hosts.
+r23n6: Warning: Permanently added 'r23n6' (ED25519) to the list of known hosts.
+r5n5: Warning: Permanently added 'r5n5' (ED25519) to the list of known hosts.
+r9n6: Warning: Permanently added 'r9n6' (ED25519) to the list of known hosts.
+[mpiexec@r2n8] match_arg (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:82): unrecognized argument npernode
+[mpiexec@r2n8] Similar arguments:
+[mpiexec@r2n8] 	 np
+[mpiexec@r2n8] 	 n
+[mpiexec@r2n8] 	 envnone
+[mpiexec@r2n8] 	 verbose
+[mpiexec@r2n8] 	 perhost
+[mpiexec@r2n8] HYD_arg_parse_array (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:106): argument matching returned error
+[mpiexec@r2n8] mpiexec_get_parameters (../../../../../src/pm/i_hydra/mpiexec/mpiexec_params.c:1294): error parsing input array
+[mpiexec@r2n8] main (../../../../../src/pm/i_hydra/mpiexec/mpiexec.c:1729): error parsing parameters
+[mpiexec@r2n8] match_arg (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:82): unrecognized argument npernode
+[mpiexec@r2n8] Similar arguments:
+[mpiexec@r2n8] 	 np
+[mpiexec@r2n8] 	 n
+[mpiexec@r2n8] 	 envnone
+[mpiexec@r2n8] 	 verbose
+[mpiexec@r2n8] 	 perhost
+[mpiexec@r2n8] HYD_arg_parse_array (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:106): argument matching returned error
+[mpiexec@r2n8] mpiexec_get_parameters (../../../../../src/pm/i_hydra/mpiexec/mpiexec_params.c:1294): error parsing input array
+[mpiexec@r2n8] main (../../../../../src/pm/i_hydra/mpiexec/mpiexec.c:1729): error parsing parameters
+[mpiexec@r2n8] match_arg (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:82): unrecognized argument npernode
+[mpiexec@r2n8] Similar arguments:
+[mpiexec@r2n8] 	 np
+[mpiexec@r2n8] 	 n
+[mpiexec@r2n8] 	 envnone
+[mpiexec@r2n8] 	 verbose
+[mpiexec@r2n8] 	 perhost
+[mpiexec@r2n8] HYD_arg_parse_array (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:106): argument matching returned error
+[mpiexec@r2n8] mpiexec_get_parameters (../../../../../src/pm/i_hydra/mpiexec/mpiexec_params.c:1294): error parsing input array
+[mpiexec@r2n8] main (../../../../../src/pm/i_hydra/mpiexec/mpiexec.c:1729): error parsing parameters
+[mpiexec@r2n8] match_arg (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:82): unrecognized argument npernode
+[mpiexec@r2n8] Similar arguments:
+[mpiexec@r2n8] 	 np
+[mpiexec@r2n8] 	 n
+[mpiexec@r2n8] 	 envnone
+[mpiexec@r2n8] 	 verbose
+[mpiexec@r2n8] 	 perhost
+[mpiexec@r2n8] HYD_arg_parse_array (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:106): argument matching returned error
+[mpiexec@r2n8] mpiexec_get_parameters (../../../../../src/pm/i_hydra/mpiexec/mpiexec_params.c:1294): error parsing input array
+[mpiexec@r2n8] main (../../../../../src/pm/i_hydra/mpiexec/mpiexec.c:1729): error parsing parameters
+[mpiexec@r2n8] match_arg (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:82): unrecognized argument npernode
+[mpiexec@r2n8] Similar arguments:
+[mpiexec@r2n8] 	 np
+[mpiexec@r2n8] 	 n
+[mpiexec@r2n8] 	 envnone
+[mpiexec@r2n8] 	 verbose
+[mpiexec@r2n8] 	 perhost
+[mpiexec@r2n8] HYD_arg_parse_array (../../../../../src/pm/i_hydra/libhydra/arg/hydra_arg.c:106): argument matching returned error
+[mpiexec@r2n8] mpiexec_get_parameters (../../../../../src/pm/i_hydra/mpiexec/mpiexec_params.c:1294): error parsing input array
+[mpiexec@r2n8] main (../../../../../src/pm/i_hydra/mpiexec/mpiexec.c:1729): error parsing parameters
