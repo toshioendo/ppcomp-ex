@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     /* LC is m*ln matrix */
     for (j = 0; j < ln; j++) {
         for (i = 0; i < m; i++) {
-            LC[i+j*k] = 0.0;
+            LC[i+j*m] = 0.0;
         }
     }
 
