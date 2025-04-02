@@ -3,7 +3,7 @@ CFLAGS = -O -g -fopenmp
 LDFLAGS = -fopenmp
 LIBS = 
 
-APP = sort
+APP = qsort
 OBJS = $(APP).o
 
 all: $(APP)
