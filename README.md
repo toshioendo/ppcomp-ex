@@ -1,4 +1,4 @@
-This repository includes sample programs for "ppcomp" lecture.
+This repository includes sample programs for Science Tokyo MCS.T418 "ppcomp" lecture.
 For lecture slide, see https://github.com/toshioendo/ppcomp
 
 * base: Base (non-parallel) sample codes
