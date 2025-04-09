@@ -7,11 +7,9 @@
 
 float data[2][NY][NX];
 
-/* in microseconds (us) */
-double get_elapsed_time(struct timeval *begin, struct timeval *end)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (end->tv_sec - begin->tv_sec) * 1000000
-        + (end->tv_usec - begin->tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 void init()
@@ -80,13 +78,13 @@ int  main(int argc, char *argv[])
     gettimeofday(&t2, NULL);
 
     {
-        double us;
+        double sec;
         double gflops;
         int op_per_point = 5; // 4 add & 1 multiply per point
 
-        us = get_elapsed_time(&t1, &t2);
-        printf("Elapsed time: %.3lf sec\n", us/1000000.0);
-        gflops = ((double)NX*NY*nt*op_per_point)/us/1000.0;
+        sec = time_diff_sec(t1, t2);
+        printf("Elapsed time: %.3lf sec\n", sec);
+        gflops = ((double)NX*NY*nt*op_per_point)/sec/1e+9;
         printf("Speed: %.3lf GFlops\n", gflops);
     }
 
