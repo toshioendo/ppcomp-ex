@@ -17,9 +17,9 @@ double *DC;
 
 #define BS (64)
 
-long time_diff_us(struct timeval st, struct timeval et)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (et.tv_sec-st.tv_sec)*1000000+(et.tv_usec-st.tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 __global__ void matmul_kernel(double *DA, double *DB, double *DC, int m, int n, int k)
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
     for (i = 0; i < 5; i++) {
         struct timeval st, st2, et2, et;
         long flop;
-        long inus, compus, outus, us;
+        double insec, compsec, outsec, sec;
 
         gettimeofday(&st, NULL);
 
@@ -130,16 +130,16 @@ int main(int argc, char *argv[])
         gettimeofday(&et, NULL);
 
         flop = 2.0*(double)m*(double)n*(double)k;
-        inus = time_diff_us(st, st2);
-        compus = time_diff_us(st2, et2);
-        outus = time_diff_us(et2, et);
-        us = time_diff_us(st, et); // inus + compus + outus;
-        printf("copyin: %ld us, compute: %ld us, copyout: %ld us\n",
-               inus, compus, outus);
-        printf("Matmul took %ld us --> %.3lf GFlops  (with data transfer)\n",
-               us, (double)flop/(double)us/1000.0);
-        printf("            %ld us --> %.3lf GFlops  (without data transfer)\n",
-               compus, (double)flop/(double)compus/1000.0);
+        insec = time_diff_sec(st, st2);
+        compsec = time_diff_sec(st2, et2);
+        outsec = time_diff_sec(et2, et);
+        sec = time_diff_sec(st, et); // insec + compsec + outsec;
+        printf("copyin: %lf sec, compute: %lf sec, copyout: %lf sec\n",
+               insec, compsec, outsec);
+        printf("Matmul took %lf sec --> %.3lf GFlops  (with data transfer)\n",
+               sec, (double)flop/(double)sec/1e+9);
+        printf("            %lf sec --> %.3lf GFlops  (without data transfer)\n",
+               compsec, (double)flop/(double)compsec/1e+9);
     }
 
     cudaFree(DA);

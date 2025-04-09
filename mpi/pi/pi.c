@@ -4,9 +4,9 @@
 #include <mpi.h>
 #include <math.h>
 
-long time_diff_us(struct timeval st, struct timeval et)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (et.tv_sec-st.tv_sec)*1000000+(et.tv_usec-st.tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 /* returns start/end point of the rank-th process */
@@ -62,7 +62,7 @@ double pi(int n)
 
 int main(int argc, char *argv[])
 {
-    int nsamples;
+    int n;
     int i;
     int rank;
     int size;
@@ -82,29 +82,28 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    nsamples = atoi(argv[1]);
+    n = atoi(argv[1]);
 
-
-    /* Repeat same computation for 3 times */
-    for (i = 0; i < 3; i++) {
+    /* Repeat same computation for 5 times */
+    for (i = 0; i < 5; i++) {
         struct timeval st;
         struct timeval et;
-        long us;
+        double sec;
         double res;
 
         MPI_Barrier(MPI_COMM_WORLD);
         gettimeofday(&st, NULL); /* get start time */
 
-        res = pi(nsamples);
+        res = pi(n);
 
         MPI_Barrier(MPI_COMM_WORLD);
         gettimeofday(&et, NULL); /* get end time */
 
         if (rank == 0) {
             /* Rank 0 prints the answer */
-            us = time_diff_us(st, et);
-            printf("Result=%.15lf: Pi took %ld us --> %lf Msamples/sec\n",
-                   res, us, (double)nsamples/(double)us);
+            sec = time_diff_sec(st, et);
+            printf("Result=%.15lf: Pi took %lf sec --> %.3lf Gsamples/sec\n",
+                   res, sec, (double)n/sec/1e+9);
         }
     }
 

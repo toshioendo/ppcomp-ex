@@ -3,9 +3,9 @@
 #include <sys/time.h>
 #include <omp.h>
 
-long time_diff_us(struct timeval st, struct timeval et)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (et.tv_sec-st.tv_sec)*1000000+(et.tv_usec-st.tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 long fib_r(int n)
@@ -46,19 +46,19 @@ int main(int argc, char *argv[])
         n = atoi(argv[1]);
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 5; i++) {
         struct timeval st;
         struct timeval et;
-        long us;
+        double sec;
         double res;
 
         gettimeofday(&st, NULL); /* get start time */
         ans = fib(n);
         gettimeofday(&et, NULL); /* get start time */
-        us = time_diff_us(st, et);
+        sec = time_diff_sec(st, et);
 
-        printf("fib(%d) = %ld: fib took %ld us\n",
-               n, ans, us);
+        printf("fib(%d) = %ld: fib took %lf sec\n",
+               n, ans, sec);
 
     }
 

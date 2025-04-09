@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <openacc.h>
 
 int m;
 int n;
@@ -12,9 +11,9 @@ double *C;
 
 #define NDIV (8) // number of division
 
-long time_diff_us(struct timeval st, struct timeval et)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (et.tv_sec-st.tv_sec)*1000000+(et.tv_usec-st.tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 /* returns start/end point of the idiv-th division */
@@ -115,15 +114,15 @@ int main(int argc, char *argv[])
     for (i = 0; i < 5; i++) {
         struct timeval st;
         struct timeval et;
-        long us;
+        double sec;
 
         gettimeofday(&st, NULL); /* get start time */
         matmul();
         gettimeofday(&et, NULL); /* get start time */
 
-        us = time_diff_us(st, et);
-        printf("Matmul took %ld us --> %.3lf GFlops\n",
-               us, 2.0*(double)m*(double)n*(double)k/(double)us/1000.0);
+        sec = time_diff_sec(st, et);
+        printf("Matmul took %lf sec --> %.3lf GFlops\n",
+               sec, 2.0*(double)m*(double)n*(double)k/sec/1e+9);
     }
 
     free(A);

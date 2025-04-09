@@ -18,9 +18,9 @@ double *DC;
 #define BS (16)
 #define NDIV (8) // number of division
 
-long time_diff_us(struct timeval st, struct timeval et)
+double time_diff_sec(struct timeval st, struct timeval et)
 {
-    return (et.tv_sec-st.tv_sec)*1000000+(et.tv_usec-st.tv_usec);
+    return (double)(et.tv_sec-st.tv_sec)+(et.tv_usec-st.tv_usec)/1000000.0;
 }
 
 __global__ void matmul_kernel(double *DA, double *DB, double *DC, int m, int n, int k)
@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
     for (iter = 0; iter < 5; iter++) {
         struct timeval st, et;
         long flop;
-        long us;
+        double sec;
 
         gettimeofday(&st, NULL);
         
@@ -203,9 +203,9 @@ int main(int argc, char *argv[])
         gettimeofday(&et, NULL);
         
         flop = 2.0*(double)m*(double)n*(double)k;
-        us = time_diff_us(st, et);
-        printf("Matmul took %ld us --> %.3lf GFlops  (with data transfer)\n",
-               us, (double)flop/(double)us/1000.0);
+        sec = time_diff_sec(st, et);
+        printf("Matmul took %lf sec --> %.3lf GFlops  (with data transfer)\n",
+               sec, (double)flop/(double)sec/1e+9);
     }
 
     cudaFree(DA);
