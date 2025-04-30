@@ -1,6 +1,7 @@
-CC = gcc
-CFLAGS = -O3 -g -fopenmp
-LDFLAGS = -fopenmp
+CC = nvc
+#CFLAGS = -O3 -acc
+CFLAGS = -O3 -acc -Minfo=accel
+LDFLAGS = -acc
 LIBS = 
 
 APP = bsort
