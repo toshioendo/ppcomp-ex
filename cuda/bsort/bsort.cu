@@ -33,12 +33,12 @@ void sort(double *data, int N)
     double INF = 1000000000.0; /* very large number */
 
     double *data2;
-    int i, j, k, l, m;
+    int i, j, k;
 
     /* round up N to power of 2 */
     while(N2 < N) N2 <<= 1;
     /* allocate N2 size array */
-    data2 = malloc(sizeof(double)*N2);
+    data2 = (double *)malloc(sizeof(double)*N2);
 
     /* Copy data[] to data2[] */
     for (i = 0; i < N; i++) data2[i] = data[i];
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
         n = atol(argv[1]);
     }
 
-    data = malloc(sizeof(double)*n);
+    data = (double *)malloc(sizeof(double)*n);
 
     for (i = 0; i < 5; i++) {
         struct timeval st;

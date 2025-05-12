@@ -1,6 +1,10 @@
 CC = nvcc
-CFLAGS = -O3 -g 
-LDFLAGS = 
+# Added options to avoid link error when the program uses
+# large global arrays. (May 12, 2025, Endo)
+CFLAGS = -O3 -g -Xcompiler -mcmodel=medium
+#CFLAGS = -O3 -g
+LDFLAGS = -Xcompiler -mcmodel=medium
+#LDFLAGS =
 LIBS = 
 
 all: diffusion
