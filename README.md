@@ -12,4 +12,4 @@ As of Apr 7 2025, This page is still under construction
 Updates in 2025
 * May 1: acc/bsort is added
 * May 12: cuda/diffusion/Makefile is updated to fix compiler errors
-* May 12: cuda/bsort/bsort.c is renamed to cuda/bsort/bsort.cu.
+* May 12: cuda/bsort/bsort.c is renamed to cuda/bsort/bsort.cu. Results of malloc uses type-cast.
