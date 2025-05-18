@@ -61,13 +61,13 @@ int matmul()
 /* send data from rank 0 to other processes */
 int comm1(int rank, int nprocs)
 {
-    int p;
+    int r;
     MPI_Status stat;
     /* A */
     if (rank == 0) {
         /* send entire A */
-        for (p = 1; p < nprocs; p++) {
-            MPI_Send(A, m*k, MPI_DOUBLE, p, 0, MPI_COMM_WORLD);
+        for (r = 1; r < nprocs; r++) {
+            MPI_Send(A, m*k, MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
         }
     }
     else {
@@ -85,15 +85,15 @@ int comm1(int rank, int nprocs)
             memcpy(LC, &C[0], n*(e-s) * sizeof(double));
         }
                    
-        for (p = 1; p < nprocs; p++) {
+        for (r = 1; r < nprocs; r++) {
             int s, e;
-            divide_length(n, p, nprocs, &s, &e);
-            /* rank p takes [s, e) */
+            divide_length(n, r, nprocs, &s, &e);
+            /* rank r takes [s, e) */
 
             /* send partial B to rank p */
-            MPI_Send(&B[k*s], k*(e-s), MPI_DOUBLE, p, 0, MPI_COMM_WORLD);
+            MPI_Send(&B[k*s], k*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
             /* send partial C to rank p */
-            MPI_Send(&C[n*s], n*(e-s), MPI_DOUBLE, p, 0, MPI_COMM_WORLD);
+            MPI_Send(&C[n*s], n*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
         }
     }
     else {
@@ -113,7 +113,7 @@ int comm1(int rank, int nprocs)
 /* send matrix C from other processes to rank 0 */
 int comm2(int rank, int nprocs)
 {
-    int p;
+    int r;
     MPI_Status stat;
 
     /*  C */
@@ -125,13 +125,13 @@ int comm2(int rank, int nprocs)
             memcpy(&C[0], LC, n*(e-s) * sizeof(double));
         }
 
-        for (p = 1; p < nprocs; p++) {
+        for (r = 1; r < nprocs; r++) {
             int s, e;
-            divide_length(n, p, nprocs, &s, &e);
-            /* rank p takes [s, e) */
+            divide_length(n, r, nprocs, &s, &e);
+            /* rank r takes [s, e) */
 
-            /* receive partial C from rank p */
-            MPI_Recv(&C[n*s], n*(e-s), MPI_DOUBLE, p, 0, MPI_COMM_WORLD, &stat);
+            /* receive partial C from rank r */
+            MPI_Recv(&C[n*s], n*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD, &stat);
         }
     }
     else {
