@@ -9,7 +9,7 @@ int n; /* The number of columns of global B/C */
 int ln; /* The number of columns of process local B/C */
 int k;
 
- 
+
 double *A;
 double *B; /* Used only in rank 0 */
 double *C; /* Used only in rank 0 */
