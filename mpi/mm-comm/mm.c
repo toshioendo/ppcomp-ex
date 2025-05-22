@@ -201,15 +201,15 @@ int main(int argc, char *argv[])
             }
         }
         /* LB is k*ln matrix */
-        for (j = 0; j < ln; j++) {
+        for (j = 0; j < n; j++) {
             for (i = 0; i < k; i++) {
-                LB[i+j*k] = 10.0;
+                B[i+j*k] = 10.0;
             }
         }
         /* LC is m*ln matrix */
-        for (j = 0; j < ln; j++) {
+        for (j = 0; j < n; j++) {
             for (i = 0; i < m; i++) {
-                LC[i+j*m] = 0.0;
+                C[i+j*m] = 0.0;
             }
         }
     }
