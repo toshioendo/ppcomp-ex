@@ -82,7 +82,7 @@ int comm1(int rank, int nprocs)
             divide_length(n, rank, nprocs, &s, &e);
             /* on rank 0, partial B, C are copied to LB, LC */
             memcpy(LB, &B[0], k*(e-s) * sizeof(double));
-            memcpy(LC, &C[0], n*(e-s) * sizeof(double));
+            memcpy(LC, &C[0], m*(e-s) * sizeof(double));
         }
                    
         for (r = 1; r < nprocs; r++) {
@@ -93,7 +93,7 @@ int comm1(int rank, int nprocs)
             /* send partial B to rank p */
             MPI_Send(&B[k*s], k*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
             /* send partial C to rank p */
-            MPI_Send(&C[n*s], n*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
+            MPI_Send(&C[n*s], m*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD);
         }
     }
     else {
@@ -104,7 +104,7 @@ int comm1(int rank, int nprocs)
         /* receive partial B (LB) from rank 0 */
         MPI_Recv(LB, k*(e-s), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &stat);
         /* receive partial C (LC) from rank 0 */
-        MPI_Recv(LC, n*(e-s), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &stat);
+        MPI_Recv(LC, m*(e-s), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &stat);
     }
 
     return 0;
@@ -122,7 +122,7 @@ int comm2(int rank, int nprocs)
             int s, e;
             divide_length(n, rank, nprocs, &s, &e);
             /* on rank 0, LC is copied to partial C */
-            memcpy(&C[0], LC, n*(e-s) * sizeof(double));
+            memcpy(&C[0], LC, m*(e-s) * sizeof(double));
         }
 
         for (r = 1; r < nprocs; r++) {
@@ -131,7 +131,7 @@ int comm2(int rank, int nprocs)
             /* rank r takes [s, e) */
 
             /* receive partial C from rank r */
-            MPI_Recv(&C[n*s], n*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD, &stat);
+            MPI_Recv(&C[n*s], m*(e-s), MPI_DOUBLE, r, 0, MPI_COMM_WORLD, &stat);
         }
     }
     else {
@@ -140,7 +140,7 @@ int comm2(int rank, int nprocs)
         /* I take [s, e) */
 
         /* send partial C (LC) to rank 0 */
-        MPI_Send(LC, n*(e-s), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+        MPI_Send(LC, m*(e-s), MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
     }
 
     return 0;
@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
     }
 
     free(A);
-    if (rank > 0) {
+    if (rank == 0) {
         free(B);
         free(C);
     }
